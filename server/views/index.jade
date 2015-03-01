@@ -2,8 +2,13 @@ doctype html
 html
   head
     title Hello World
-  body(ng-app="MailerApp")
-    .container-fluid(ng-view="")
+    link(href='css/mailer.css' rel='stylesheet')
+
+  body(ng-app='MailerApp')
+
+    .container
+      h1 Hello Mailer
+    .container-fluid(ng-view='')
     script(src='scripts/vendors.js')
     script(src='scripts/templates.js')
     script(src='scripts/mailer.js')

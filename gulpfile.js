@@ -4,7 +4,10 @@ var tasks = require('js-stack.tasks')(gulp, {
     vendors: [
       'node_modules/angular/angular.js',
       'node_modules/angular-route/angular-route.js'
-    ]
+    ],
+    stylesheets: {
+      plugins: ['bootstrap-styl']
+    }
   }
 });
 var runSequence = require('run-sequence');
