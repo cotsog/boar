@@ -1,6 +1,6 @@
 'use strict';
 
-class IndexController {
+class SettingsController {
 
   constructor ($http) {
     console.log($http);
@@ -9,5 +9,5 @@ class IndexController {
 
 module.exports = [
   '$http',
-  IndexController
+  SettingsController
 ];

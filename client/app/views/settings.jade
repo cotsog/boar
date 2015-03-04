@@ -1,0 +1,17 @@
+h1 Settings
+
+form(name='settingsform')
+  .form-group
+    label(for='settings-name') Name
+    input#settings-name.form-control(
+      type='text' placeholder='Name' name='name' ng-model='settings.name'
+      ng-minlength=3 ng-maxlength=20 ng-pattern='/^[a-zA-Z]+$/' required
+    )
+    .form-alert(ng-show='settingsform.name.$dirty && settingsform.name.$invalid') Invalid name
+  .form-group
+    label(for='settings-email') Email
+    input#settings-email.form-control(type='email' placeholder='Email' name='email' ng-model='settings.email')
+  .form-group
+    label(for='settings-age') Age
+    input#settings-age.form-control(type='number' placeholder='Age' name='age' ng-model='settings.age')
+  button.btn.btn-default(type='submit') Submit

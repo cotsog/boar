@@ -5,10 +5,18 @@ html
     link(href='css/mailer.css' rel='stylesheet')
 
   body(ng-app='MailerApp')
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='#/') Mailer
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='#/') Home
+            li
+              a(href='#settings') Settings
 
-    .container
-      h1 Hello Mailer
-    .container-fluid(ng-view='')
+    .container(ng-view='')
     script(src='scripts/vendors.js')
     script(src='scripts/templates.js')
     script(src='scripts/mailer.js')

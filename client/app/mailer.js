@@ -1,19 +1,28 @@
 'use strict';
 
 var angular = require('angular');
-var IndexController = require('./controllers/index');
+var HomeController = require('./controllers/home');
+var SettingsController = require('./controllers/settings');
 
 angular
   .module('MailerApp', [
     'templates',
     'ngRoute'
   ])
-  .controller('IndexController', IndexController)
+  .controller('HomeController', HomeController)
+  .controller('SettingsController', SettingsController)
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-      .when('/alma', {
-        templateUrl: 'views/mailer.html',
-        controller: 'IndexController'
+      .when('/', {
+        templateUrl: 'views/home.html',
+        controller: 'HomeController'
+      })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'HomeController'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
   }])
   .run();
