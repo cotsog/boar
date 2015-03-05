@@ -28,6 +28,7 @@ form(name='settingsform' ng-submit='updateSettings()' novalidate)
     )
     .form-alert(ng-show='settingsform.age.$dirty && settingsform.age.$invalid')
       div(ng-show='settingsform.age.$error.required') Your age is required.
+      div(ng-show='settingsform.age.$error.number') Your age must be a number.
       div(ng-show='settingsform.age.$error.min') You must be at least 3 to use this site.
       div(ng-show='settingsform.age.$error.max') You are 200 or older? Really?.
-  button.btn.btn-default(type='submit') Update
+  button.btn.btn-default(type='submit' ng-disabled='settingsform.$dirty && settingsform.$invalid') Update
