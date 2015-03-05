@@ -19,7 +19,7 @@ angular
       })
       .when('/settings', {
         templateUrl: 'views/settings.html',
-        controller: 'HomeController'
+        controller: 'SettingsController'
       })
       .otherwise({
         redirectTo: '/'

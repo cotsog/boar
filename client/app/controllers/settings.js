@@ -2,12 +2,16 @@
 
 class SettingsController {
 
-  constructor ($http) {
-    console.log($http);
+  constructor ($scope) {
+    this.$scope = $scope;
+
+    this.$scope.updateSettings = () => {
+      console.log(this.$scope);
+    }
   }
 }
 
 module.exports = [
-  '$http',
+  '$scope',
   SettingsController
 ];
