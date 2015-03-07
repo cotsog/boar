@@ -1,1 +1,8 @@
-h1 Home
+.col-xs-3(ng-controller='MailListingController')
+  h2 Sidebar
+
+  table.table.table-bordered
+    tr(ng-repeat='mail in emails')
+      td {{ mail.subject }}
+.col-xs-9(ng-controller='ContentController')
+  h2 Content
