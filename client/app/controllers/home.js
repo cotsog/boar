@@ -2,12 +2,22 @@
 
 class HomeController {
 
-  constructor ($http) {
-    //console.log($http);
+  constructor ($scope, $sce) {
+    $scope.setSelectedMail = function(mail) {
+      $scope.selectedMail = mail;
+    };
+
+    $scope.isSelected = function(mail) {
+      return $scope.selectedMail && mail === $scope.selectedMail;
+    };
+
+    $scope.safeHtml = function(html) {
+      return $sce.trustAsHtml(html);
+    }
   }
 }
 
 module.exports = [
-  '$http',
+  '$scope', '$sce',
   HomeController
 ];

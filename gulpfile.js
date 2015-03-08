@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var tasks = require('js-stack.tasks')(gulp, {
+var tasks = require('boar-tasks').getTasks(gulp, {
   client: {
     vendors: [
       'node_modules/angular/angular.js',

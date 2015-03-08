@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "babelify": "^5.0.3",
+    "boar-tasks": "^0.1.2",
     "browserify": "^9.0.3",
     "browserify-shim": "^3.8.3",
     "gulp": "^3.8.11",
