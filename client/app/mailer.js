@@ -5,6 +5,7 @@ var HomeController = require('./controllers/home');
 var SettingsController = require('./controllers/settings');
 var MailListingController = require('./controllers/mail_listing');
 var ContentController = require('./controllers/content');
+var MailService = require('./services/mail');
 
 angular
   .module('MailerApp', [
@@ -15,6 +16,7 @@ angular
   .controller('SettingsController', SettingsController)
   .controller('MailListingController', MailListingController)
   .controller('ContentController', ContentController)
+  .service('MailService', MailService)
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {

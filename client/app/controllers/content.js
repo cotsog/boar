@@ -2,7 +2,7 @@
 
 class ContentController {
 
-  constructor ($scope) {
+  constructor ($scope, MailService) {
     $scope.showingReply = false;
     $scope.reply = {};
 
@@ -14,10 +14,23 @@ class ContentController {
         body: `\n\n ------------------------------ \n\n ${oldMailBody}`
       };
     };
+
+    $scope.sendReply = function() {
+      MailService.sendMail($scope.reply).then(function(status) {
+
+      }, function(err) {
+
+      });
+    };
+    
+    $scope.$watch('selectedMail', function() {
+      $scope.showingReply = false;
+      $scope.reply = {};
+    });
   }
 }
 
 module.exports = [
-  '$scope',
+  '$scope', 'MailService',
   ContentController
 ];
