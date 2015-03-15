@@ -2,7 +2,7 @@
 
 class ContentController {
 
-  constructor ($scope, MailService) {
+  constructor ($scope, $rootScope, MailService) {
     $scope.showingReply = false;
     $scope.reply = {};
 
@@ -16,10 +16,13 @@ class ContentController {
     };
 
     $scope.sendReply = function() {
+      $scope.showingReply = false;
+      $rootScope.loading = true;
+
       MailService.sendMail($scope.reply).then(function(status) {
-
+        $rootScope.loading = false;
       }, function(err) {
-
+        $rootScope.loading = false;
       });
     };
     
@@ -31,6 +34,6 @@ class ContentController {
 }
 
 module.exports = [
-  '$scope', 'MailService',
+  '$scope', '$rootScope', 'MailService',
   ContentController
 ];

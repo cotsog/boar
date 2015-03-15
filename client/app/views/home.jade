@@ -1,13 +1,17 @@
 .col-xs-3(ng-controller='MailListingController')
   h2 Sidebar
 
+  form(name='searchform' novalidate)
+  .form-group
+    input#search-name.form-control(
+    type='text' placeholder='Filter messages' name='search' ng-model='nYearsAgo'
+    )
+
   table.table.table-bordered
     tr(
-      ng-repeat='mail in emails'
-      ng-click='setSelectedMail(mail)'
-      ng-class='{active: isSelected(mail)}'
+      email-listing email='mail' action='setSelectedMail(selectedMail)' gravatar-size='20'
+      ng-repeat='mail in (emails | orderBy:"sent_at":true | filter:searchPastNYears)'
     )
-      td {{ mail.subject }}
 .col-xs-9(ng-controller='ContentController')
   h2 Content
 

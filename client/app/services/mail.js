@@ -17,7 +17,7 @@ class MailService {
     var deferred = this.$q.defer();
 
     this.$http({
-      method: 'GET',
+      method: 'POST',
       data: mail,
       url: '/api/send'
     }).success(function(data, status, header) {
@@ -26,13 +26,13 @@ class MailService {
       deferred.reject(data);
     });
 
-    return deferred.promise();
+    return deferred.promise;
   }
 }
 
 module.exports = [
-  '$http',
-  function($http) {
-    return new MailService($http);
+  '$http', '$q',
+  function($http, $q) {
+    return new MailService($http, $q);
   }
 ];
