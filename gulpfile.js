@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var tasks = require('boar-tasks').getTasks(gulp, {
   client: {
