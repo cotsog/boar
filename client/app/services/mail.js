@@ -30,9 +30,4 @@ class MailService {
   }
 }
 
-module.exports = [
-  '$http', '$q',
-  function($http, $q) {
-    return new MailService($http, $q);
-  }
-];
+module.exports = MailService;

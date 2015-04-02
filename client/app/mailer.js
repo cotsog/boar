@@ -17,7 +17,12 @@ angular
   .controller('SettingsController', SettingsController)
   .controller('MailListingController', MailListingController)
   .controller('ContentController', ContentController)
-  .service('MailService', MailService)
+  .service('MailService', [
+    '$http', '$q',
+    function($http, $q) {
+      return new MailService($http, $q);
+    }
+  ])
   .directive('emailListing', emailListingDirective)
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
