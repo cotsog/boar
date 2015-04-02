@@ -17,7 +17,4 @@ class HomeController {
   }
 }
 
-module.exports = [
-  '$scope', '$sce',
-  HomeController
-];
+module.exports = HomeController;

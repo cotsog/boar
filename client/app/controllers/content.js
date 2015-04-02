@@ -33,7 +33,4 @@ class ContentController {
   }
 }
 
-module.exports = [
-  '$scope', '$rootScope', 'MailService',
-  ContentController
-];
+module.exports = ContentController;

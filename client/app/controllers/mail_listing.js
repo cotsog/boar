@@ -23,7 +23,4 @@ class MailListingController {
   }
 }
 
-module.exports = [
-  '$scope', 'MailService',
-  MailListingController
-];
+module.exports = MailListingController;

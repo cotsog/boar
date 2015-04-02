@@ -13,10 +13,22 @@ angular
     'templates',
     'ngRoute'
   ])
-  .controller('HomeController', HomeController)
-  .controller('SettingsController', SettingsController)
-  .controller('MailListingController', MailListingController)
-  .controller('ContentController', ContentController)
+  .controller('HomeController', [
+    '$scope', '$sce',
+    HomeController
+  ])
+  .controller('SettingsController', [
+    '$scope',
+    SettingsController
+  ])
+  .controller('MailListingController', [
+    '$scope', 'MailService',
+    MailListingController
+  ])
+  .controller('ContentController', [
+    '$scope', '$rootScope', 'MailService',
+    ContentController
+  ])
   .service('MailService', [
     '$http', '$q',
     function($http, $q) {

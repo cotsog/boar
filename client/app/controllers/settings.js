@@ -12,7 +12,4 @@ class SettingsController {
   }
 }
 
-module.exports = [
-  '$scope',
-  SettingsController
-];
+module.exports = SettingsController;
