@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 var tasks = require('boar-tasks').getTasks(gulp, {
   client: {
     vendors: [
@@ -12,7 +13,6 @@ var tasks = require('boar-tasks').getTasks(gulp, {
     }
   }
 });
-var runSequence = require('run-sequence');
 
 gulp.task('build', ['build-clean'], function(cb) {
   runSequence([
@@ -74,7 +74,12 @@ gulp.task('client-watch', function() {
   gulp.watch(tasks.config.client.app.viewPattern, ['client-build-views']);
 });
 
-gulp.task('client-test', tasks.client.test);
+gulp.task('client-test-run', tasks.client.test);
+gulp.task('client-test', function(done) {
+  runSequence('client-build-views', 'client-test-run', function() {
+    done();
+  });
+});
 
 // End to End Tasks
 gulp.task('e2e-test', tasks.e2e.test);

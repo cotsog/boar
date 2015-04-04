@@ -8,7 +8,7 @@ var ContentController = require('./controllers/content');
 var MailService = require('./services/mail');
 var emailListingDirective = require('./directives/email_listing');
 
-angular
+module.exports = angular
   .module('MailerApp', [
     'templates',
     'ngRoute'

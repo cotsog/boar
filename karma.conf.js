@@ -6,6 +6,7 @@ module.exports = function(config) {
     client: {
       app: {
         testModules: [
+          'dist/assets/scripts/templates.js',
           'node_modules/angular-mocks/angular-mocks.js'
         ]
       }
