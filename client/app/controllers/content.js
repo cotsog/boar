@@ -24,7 +24,7 @@ class ContentController {
       this.$scope.showingReply = false;
       this.$rootScope.loading = true;
 
-      this.mailService.sendMail(this.$scope.reply).then((status) => {
+      return this.mailService.sendMail(this.$scope.reply).then((status) => {
         this.$rootScope.loading = false;
       }, (err) => {
         this.$rootScope.loading = false;

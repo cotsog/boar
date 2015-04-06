@@ -7,6 +7,7 @@ module.exports = function(config) {
       app: {
         testModules: [
           'dist/assets/scripts/templates.js',
+          'node_modules/babelify/node_modules/babel-core/browser-polyfill.js',
           'node_modules/angular-mocks/angular-mocks.js'
         ]
       }
