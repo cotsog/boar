@@ -9,7 +9,7 @@ var tasks = require('boar-tasks').getTasks(gulp, {
       'node_modules/angular-route/angular-route.js'
     ],
     stylesheets: {
-      plugins: ['bootstrap-styl']
+      plugins: [require('bootstrap-styl')()]
     }
   }
 });
