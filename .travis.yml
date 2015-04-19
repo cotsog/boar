@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "iojs-v1.4.1"
+before_script:
+  - "gulp update-webdriver"
+services:
+  - mongodb
