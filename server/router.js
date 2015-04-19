@@ -1,7 +1,7 @@
 var router = require('koa-router')();
 
 router.get('/', function *() {
-  yield this.render('index');
+  this.render('index');
 });
 
 router.get('/api/mail', function *() {
