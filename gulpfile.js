@@ -82,5 +82,12 @@ gulp.task('client-test', function(done) {
 });
 
 // End to End Tasks
-gulp.task('e2e-test', tasks.e2e.test);
+gulp.task('e2e-test-run', tasks.e2e.test);
+gulp.task('e2e-test-start', tasks.e2e.startServer);
+gulp.task('e2e-test-end', tasks.e2e.stopServer);
+gulp.task('e2e-test', function(done) {
+  runSequence('e2e-test-start', 'e2e-test-run', 'e2e-test-end', function() {
+    done();
+  });
+});
 gulp.task('update-webdriver', tasks.e2e.updateWebDriver);
