@@ -21,5 +21,6 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.listen(config.port);
+console.log('Application is listening on port ' + config.port);
 
 module.exports = app;
