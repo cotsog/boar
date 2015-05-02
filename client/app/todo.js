@@ -33,20 +33,23 @@ module.exports = angular
   .directive('todoEscape', TodoEscapeDirective)
   .directive('todoFocus', TodoFocusDirective)
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/todo.html',
-        controller: 'TodoController',
-        resolve: {
-          store: function (todoStorage) {
-            // Get the correct module (API or localStorage).
-            return todoStorage.then(function (storageModule) {
-              storageModule.get();
-              return storageModule;
-            });
-          }
+    var routeConfig = {
+      controller: 'TodoController',
+      templateUrl: 'views/todo.html',
+      resolve: {
+        store: function (todoStorage) {
+          // Get the correct module (API or localStorage).
+          return todoStorage.then(function (storageModule) {
+            storageModule.get();
+            return storageModule;
+          });
         }
-      })
+      }
+    };
+
+    $routeProvider
+      .when('/', routeConfig)
+      .when('/:status', routeConfig)
       .otherwise({
         redirectTo: '/'
       });

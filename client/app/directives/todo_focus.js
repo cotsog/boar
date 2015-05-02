@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function todoFocus($timeout) {
-  'use strict';
-
   return function (scope, elem, attrs) {
     scope.$watch(attrs.todoFocus, function (newVal) {
       if (newVal) {
