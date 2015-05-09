@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function ($http, $injector) {
-  return $http.get('/api')
+  return $http.get('/api/todos')
     .then(function () {
       return $injector.get('api');
     }, function () {
