@@ -11,6 +11,11 @@ var tasks = require('boar-tasks').getTasks(gulp, {
     stylesheets: {
       plugins: [require('bootstrap-styl')()]
     }
+  },
+  server: {
+    test: {
+      requires: ['co-mocha', './setup/mocha_server.js']
+    }
   }
 });
 
@@ -20,11 +25,14 @@ gulp.task('build', ['build-clean'], function(cb) {
   ], cb);
 });
 
-gulp.task('start', ['build'], function() {
+var startTasks = function() {
   gulp.run('server');
   gulp.run('server-watch');
   gulp.run('client-watch');
-});
+};
+
+gulp.task('start', ['build'], startTasks);
+gulp.task('start-quick', startTasks);
 
 gulp.task('test', ['server-test', 'client-test']);
 
