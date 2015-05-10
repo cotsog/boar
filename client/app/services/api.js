@@ -33,7 +33,7 @@ module.exports = function($http) {
 
       store.todos.splice(store.todos.indexOf(todo), 1);
 
-      return $http.delete('/api/todos/' + todo.id)
+      return $http.delete('/api/todos/' + todo._id)
         .then(function success() {
           return store.todos;
         }, function error() {
@@ -55,8 +55,7 @@ module.exports = function($http) {
 
       return $http.post('/api/todos', todo)
         .then(function success(resp) {
-          todo.id = resp.data.id;
-          store.todos.push(todo);
+          store.todos.push(resp.data);
           return store.todos;
         }, function error() {
           angular.copy(originalTodos, store.todos);
@@ -67,7 +66,7 @@ module.exports = function($http) {
     put: function (todo) {
       var originalTodos = store.todos.slice(0);
 
-      return $http.put('/api/todos/' + todo.id, todo)
+      return $http.put('/api/todos/' + todo._id, todo)
         .then(function success() {
           return store.todos;
         }, function error() {
