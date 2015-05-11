@@ -1,4 +1,6 @@
 'use strict';
+var app = require('../server_setup');
+var supertest = require('supertest');
 
 describe('ApiController', function() {
   it('should work', function() {
