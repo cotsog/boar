@@ -1,19 +1,10 @@
 'use strict';
 var request = require('supertest');
-var sinon = require('sinon');
 var app = require('../server_listen');
 var Todo = require('../models/todo');
 
 describe('ApiController', function() {
   var exampleTodo = {title: 'First task', complete: false};
-
-  beforeEach(function() {
-    this.sinon = sinon.sandbox.create();
-  });
-
-  afterEach(function() {
-    this.sinon.restore();
-  });
 
   it('should list todos', function(done) {
     var result = [exampleTodo];
