@@ -16,11 +16,16 @@ module.exports = function(router) {
   });
 
   router.delete('/api/todos/:id', function*() {
-    this.body = yield Todo.findOneAndRemove({_id: this.params.id}).exec();
+    this.body = yield Todo.findOneAndRemove(
+      {_id: parseInt(this.params.id, 10)}
+    ).exec();
   });
 
   router.put('/api/todos/:id', function*() {
     var updateTodo = yield parse.json(this.req);
-    this.body = yield Todo.findOneAndUpdate({_id: this.params.id}, updateTodo).exec();
+    this.body = yield Todo.findOneAndUpdate(
+      {_id: parseInt(this.params.id, 10)},
+      updateTodo
+    ).exec();
   });
 };

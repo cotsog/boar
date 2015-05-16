@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp client-test"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,6 @@
     "run-sequence": "1.1.0",
     "sinon": "1.14.1",
     "sinon-chai": "2.7.0",
-    "supertest": "^0.15.0"
+    "supertest": "1.0.1"
   }
 }
