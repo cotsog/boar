@@ -1,8 +1,8 @@
 ### BOAR Stack
-[![Dependency Status](https://david-dm.org/blacksonic/gulp-tasks-example.svg)](https://david-dm.org/blacksonic/gulp-tasks-example)
-[![Build Status](https://api.travis-ci.org/blacksonic/gulp-tasks-example.svg?branch=master)](https://travis-ci.org/blacksonic/gulp-tasks-example)
+[![Dependency Status](https://david-dm.org/blacksonic/boar.svg)](https://david-dm.org/blacksonic/boar)
+[![Build Status](https://api.travis-ci.org/blacksonic/boar.svg?branch=master)](https://travis-ci.org/blacksonic/boar)
 
-BOAR Stack is a boilerplate that provides a nice starting point for full stack ES6 JavaScript Web development with [Koa](http://koajs.com/), [AngularJS](http://angularjs.org/), and [io.js](http://www.iojs.org/) along with [MongoDB](https://www.mongodb.org/). A summary of tech stack:
+BOAR Stack is a boilerplate that provides a nice starting point for full-stack ES6 JavaScript web development with [Koa](http://koajs.com/), [AngularJS](http://angularjs.org/), and [io.js](http://www.iojs.org/) along with [MongoDB](https://www.mongodb.org/). A summary of tech stack:
 * **Client**: AngularJS and Twitter Bootstrap with Jade partials put together with Browserify and Babel.
 * **Server**: Koa for RESTful API on top of io.js.
 * Gulp tasks are used to facilitate development and testing.
@@ -21,7 +21,7 @@ npm install
 npm start
 ```
 
-Your application should run on the 3000 port so in your browser just go to [http://localhost:3000](http://localhost:3000). If you want to run tests, simply type:
+Your application should run on the 9100 port so in your browser just go to [http://localhost:9100](http://localhost:9100). If you want to run tests, simply type:
 
 ```bash
 npm test
