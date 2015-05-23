@@ -1,82 +1,65 @@
 'use strict';
+var Promise = require('bluebird');
+var STORAGE_ID = 'todos-angularjs';
 
-module.exports = function ($q) {
-  var STORAGE_ID = 'todos-angularjs';
+class TodoLocalStorage {
+  constructor ($q) {
+    this.$q = $q;
+    this.todos = [];
+  }
 
-  var store = {
-    todos: [],
+  _getFromLocalStorage () {
+    return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+  }
 
-    _getFromLocalStorage: function () {
-      return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-    },
+  _saveToLocalStorage (todos) {
+    localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+  }
 
-    _saveToLocalStorage: function (todos) {
-      localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
-    },
+  clearCompleted () {
+    var completeTodos = [];
+    var incompleteTodos = [];
+    this.todos.forEach(function (todo) {
+      if (todo.completed) {
+        completeTodos.push(todo);
+      } else {
+        incompleteTodos.push(todo);
+      }
+    });
 
-    clearCompleted: function () {
-      var deferred = $q.defer();
+    angular.copy(incompleteTodos, this.todos);
+    this._saveToLocalStorage(this.todos);
 
-      var completeTodos = [];
-      var incompleteTodos = [];
-      store.todos.forEach(function (todo) {
-        if (todo.completed) {
-          completeTodos.push(todo);
-        } else {
-          incompleteTodos.push(todo);
-        }
-      });
+    return Promise.resolve(this.todos);
+  }
 
-      angular.copy(incompleteTodos, store.todos);
+  delete (todo) {
+    this.todos.splice(this.todos.indexOf(todo), 1);
+    this._saveToLocalStorage(this.todos);
 
-      store._saveToLocalStorage(store.todos);
-      deferred.resolve(store.todos);
+    return Promise.resolve(this.todos);
+  }
 
-      return deferred.promise;
-    },
+  get () {
+    angular.copy(this._getFromLocalStorage(), this.todos);
 
-    delete: function (todo) {
-      var deferred = $q.defer();
+    return Promise.resolve(this.todos);
+  }
 
-      store.todos.splice(store.todos.indexOf(todo), 1);
+  insert (todo) {
+    this.todos.push(todo);
+    this._saveToLocalStorage(this.todos);
 
-      store._saveToLocalStorage(store.todos);
-      deferred.resolve(store.todos);
+    return Promise.resolve(this.todos);
+  }
 
-      return deferred.promise;
-    },
+  put (todo, index) {
+    this.todos[index] = todo;
+    this._saveToLocalStorage(this.todos);
 
-    get: function () {
-      var deferred = $q.defer();
+    return Promise.resolve(this.todos);
+  }
+}
 
-      angular.copy(store._getFromLocalStorage(), store.todos);
-      deferred.resolve(store.todos);
-
-      return deferred.promise;
-    },
-
-    insert: function (todo) {
-      var deferred = $q.defer();
-
-      store.todos.push(todo);
-
-      store._saveToLocalStorage(store.todos);
-      deferred.resolve(store.todos);
-
-      return deferred.promise;
-    },
-
-    put: function (todo, index) {
-      var deferred = $q.defer();
-
-      store.todos[index] = todo;
-
-      store._saveToLocalStorage(store.todos);
-      deferred.resolve(store.todos);
-
-      return deferred.promise;
-    }
-  };
-
-  return store;
-};
+module.exports = TodoLocalStorage;
+module.exports.$inject = ['$q'];

@@ -22,10 +22,7 @@ module.exports = angular
     '$http',
     ApiService
   ])
-  .factory('localStorage', [
-    '$q',
-    LocalStorageService
-  ])
+  .service('localStorage', LocalStorageService)
   .factory('todoStorage', [
     '$http', '$injector',
     TodoStorageService
