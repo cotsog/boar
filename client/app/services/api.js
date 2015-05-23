@@ -1,80 +1,81 @@
 'use strict';
 
-module.exports = function($http) {
-  var store = {
-    todos: [],
+class TodoApi {
+  constructor($http) {
+    this.$http = $http;
+    this.todos = [];
+  }
 
-    clearCompleted: function () {
-      var originalTodos = store.todos.slice(0);
+  clearCompleted () {
+    var originalTodos = this.todos.slice(0);
 
-      var completeTodos = [];
-      var incompleteTodos = [];
-      store.todos.forEach(function (todo) {
-        if (todo.completed) {
-          completeTodos.push(todo);
-        } else {
-          incompleteTodos.push(todo);
-        }
+    var completeTodos = [];
+    var incompleteTodos = [];
+    this.todos.forEach(function (todo) {
+      if (todo.completed) {
+        completeTodos.push(todo);
+      } else {
+        incompleteTodos.push(todo);
+      }
+    });
+
+    angular.copy(incompleteTodos, this.todos);
+
+    return this.$http.delete('/api/todos')
+      .then(() => {
+        return this.todos;
+      }, () => {
+        angular.copy(originalTodos, this.todos);
+        return originalTodos;
       });
+  }
 
-      angular.copy(incompleteTodos, store.todos);
+  delete (todo) {
+    var originalTodos = this.todos.slice(0);
+    this.todos.splice(this.todos.indexOf(todo), 1);
 
-      return $http.delete('/api/todos')
-        .then(function success() {
-          return store.todos;
-        }, function error() {
-          angular.copy(originalTodos, store.todos);
-          return originalTodos;
-        });
-    },
+    return this.$http.delete('/api/todos/' + todo._id)
+      .then(() => {
+        return this.todos;
+      }, () => {
+        angular.copy(originalTodos, this.todos);
+        return originalTodos;
+      });
+  }
 
-    delete: function (todo) {
-      var originalTodos = store.todos.slice(0);
+  get () {
+    return this.$http.get('/api/todos')
+      .then((resp) => {
+        angular.copy(resp.data, this.todos);
+        return this.todos;
+      });
+  }
 
-      store.todos.splice(store.todos.indexOf(todo), 1);
+  insert (todo) {
+    var originalTodos = this.todos.slice(0);
 
-      return $http.delete('/api/todos/' + todo._id)
-        .then(function success() {
-          return store.todos;
-        }, function error() {
-          angular.copy(originalTodos, store.todos);
-          return originalTodos;
-        });
-    },
+    return this.$http.post('/api/todos', todo)
+      .then((resp) => {
+        this.todos.push(resp.data);
+        return this.todos;
+      }, () => {
+        angular.copy(originalTodos, this.todos);
+        return this.todos;
+      });
+  }
 
-    get: function () {
-      return $http.get('/api/todos')
-        .then(function (resp) {
-          angular.copy(resp.data, store.todos);
-          return store.todos;
-        });
-    },
+  put (todo) {
+    var originalTodos = this.todos.slice(0);
 
-    insert: function (todo) {
-      var originalTodos = store.todos.slice(0);
+    return $http.put('/api/todos/' + todo._id, todo)
+      .then(() => {
+        return this.todos;
+      }, () => {
+        angular.copy(originalTodos, this.todos);
+        return originalTodos;
+      });
+  }
+}
 
-      return $http.post('/api/todos', todo)
-        .then(function success(resp) {
-          store.todos.push(resp.data);
-          return store.todos;
-        }, function error() {
-          angular.copy(originalTodos, store.todos);
-          return store.todos;
-        });
-    },
-
-    put: function (todo) {
-      var originalTodos = store.todos.slice(0);
-
-      return $http.put('/api/todos/' + todo._id, todo)
-        .then(function success() {
-          return store.todos;
-        }, function error() {
-          angular.copy(originalTodos, store.todos);
-          return originalTodos;
-        });
-    }
-  };
-
-  return store;
-};
+module.exports = TodoApi;
+module.exports.$inject = ['$http'];

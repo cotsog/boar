@@ -8,3 +8,4 @@ module.exports = function ($http, $injector) {
       return $injector.get('localStorage');
     });
 };
+module.exports.$inject = ['$http', '$injector'];

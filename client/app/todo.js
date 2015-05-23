@@ -18,15 +18,9 @@ module.exports = angular
     '$scope', '$routeParams', '$filter', 'store',
     TodoController
   ])
-  .factory('api', [
-    '$http',
-    ApiService
-  ])
+  .service('api', ApiService)
   .service('localStorage', LocalStorageService)
-  .factory('todoStorage', [
-    '$http', '$injector',
-    TodoStorageService
-  ])
+  .factory('todoStorage', TodoStorageService)
   .directive('todoEscape', TodoEscapeDirective)
   .directive('todoFocus', TodoFocusDirective)
   .config(['$routeProvider', function ($routeProvider) {

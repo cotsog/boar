@@ -1,10 +1,9 @@
 'use strict';
 var Promise = require('bluebird');
-var STORAGE_ID = 'todos-angularjs';
+const STORAGE_ID = 'todos-angularjs';
 
 class TodoLocalStorage {
-  constructor ($q) {
-    this.$q = $q;
+  constructor () {
     this.todos = [];
   }
 
@@ -62,4 +61,3 @@ class TodoLocalStorage {
 }
 
 module.exports = TodoLocalStorage;
-module.exports.$inject = ['$q'];

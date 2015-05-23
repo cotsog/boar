@@ -11,3 +11,4 @@ module.exports = function todoFocus($timeout) {
     });
   };
 };
+module.exports.$inject = ['$timeout'];
