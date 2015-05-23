@@ -67,7 +67,7 @@ class TodoApi {
   put (todo) {
     var originalTodos = this.todos.slice(0);
 
-    return $http.put('/api/todos/' + todo._id, todo)
+    return this.$http.put('/api/todos/' + todo._id, todo)
       .then(() => {
         return this.todos;
       }, () => {

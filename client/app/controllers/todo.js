@@ -1,29 +1,40 @@
 'use strict';
 
-module.exports = function TodoCtrl($scope, $routeParams, $filter, store) {
-  var todos = $scope.todos = store.todos;
+class TodoController {
+  constructor ($scope, $routeParams, $filter, store) {
+    this.todos = $scope.todos = store.todos;
 
-  $scope.newTodo = '';
-  $scope.editedTodo = null;
+    this.$scope = $scope;
+    this.$routeParams = $routeParams;
+    this.$filter = $filter;
+    this.store = store;
 
-  $scope.$watch('todos', function () {
-    $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
-    $scope.completedCount = todos.length - $scope.remainingCount;
-    $scope.allChecked = !$scope.remainingCount;
-  }, true);
+    $scope.newTodo = '';
+    $scope.editedTodo = null;
 
-  // Monitor the current route for changes and adjust the filter accordingly.
-  $scope.$on('$routeChangeSuccess', function () {
-    var status = $scope.status = $routeParams.status || '';
+    this._setupScopeEvents();
+  }
 
-    $scope.statusFilter = (status === 'active') ?
-    { completed: false } : (status === 'completed') ?
-    { completed: true } : null;
-  });
+  _setupScopeEvents () {
+    this.$scope.$watch('todos', () => {
+      this.$scope.remainingCount = this.$filter('filter')(this.todos, { completed: false }).length;
+      this.$scope.completedCount = this.todos.length - this.$scope.remainingCount;
+      this.$scope.allChecked = !this.$scope.remainingCount;
+    }, true);
 
-  $scope.addTodo = function () {
-    var newTodo = {
-      title: $scope.newTodo.trim(),
+    // Monitor the current route for changes and adjust the filter accordingly.
+    this.$scope.$on('$routeChangeSuccess', () => {
+      let status = this.$scope.status = this.$routeParams.status || '';
+
+      this.$scope.statusFilter = (status === 'active') ?
+        { completed: false } : (status === 'completed') ?
+        { completed: true } : {};
+    });
+  }
+
+  addTodo () {
+    let newTodo = {
+      title: this.$scope.newTodo.trim(),
       completed: false
     };
 
@@ -31,88 +42,87 @@ module.exports = function TodoCtrl($scope, $routeParams, $filter, store) {
       return;
     }
 
-    $scope.saving = true;
-    store.insert(newTodo)
-      .then(function success() {
-        $scope.newTodo = '';
+    this.$scope.saving = true;
+    this.store.insert(newTodo)
+      .then(() => {
+        this.$scope.newTodo = '';
       })
-      .finally(function () {
-        $scope.saving = false;
+      .finally(() => {
+        this.$scope.saving = false;
       });
-  };
+  }
 
-  $scope.editTodo = function (todo) {
-    $scope.editedTodo = todo;
+  editTodo (todo) {
+    this.$scope.editedTodo = todo;
     // Clone the original todo to restore it on demand.
-    $scope.originalTodo = angular.extend({}, todo);
-  };
+    this.$scope.originalTodo = angular.extend({}, todo);
+  }
 
-  $scope.saveEdits = function (todo, event) {
+  saveEdits (todo, event) {
     // Blur events are automatically triggered after the form submit event.
     // This does some unfortunate logic handling to prevent saving twice.
-    if (event === 'blur' && $scope.saveEvent === 'submit') {
-      $scope.saveEvent = null;
+    if (event === 'blur' && this.$scope.saveEvent === 'submit') {
+      this.$scope.saveEvent = null;
       return;
     }
 
-    $scope.saveEvent = event;
+    this.$scope.saveEvent = event;
 
-    if ($scope.reverted) {
+    if (this.$scope.reverted) {
       // Todo edits were reverted-- don't save.
-      $scope.reverted = null;
+      this.$scope.reverted = null;
       return;
     }
 
     todo.title = todo.title.trim();
 
-    if (todo.title === $scope.originalTodo.title) {
-      $scope.editedTodo = null;
+    if (todo.title === this.$scope.originalTodo.title) {
+      this.$scope.editedTodo = null;
       return;
     }
 
-    store[todo.title ? 'put' : 'delete'](todo)
-      .then(function success() {}, function error() {
-        todo.title = $scope.originalTodo.title;
+    this.store[todo.title ? 'put' : 'delete'](todo)
+      .then(() => {}, () => {
+        todo.title = this.$scope.originalTodo.title;
       })
-      .finally(function () {
-        $scope.editedTodo = null;
+      .finally(() => {
+        this.$scope.editedTodo = null;
       });
-  };
+  }
 
-  $scope.revertEdits = function (todo) {
-    todos[todos.indexOf(todo)] = $scope.originalTodo;
-    $scope.editedTodo = null;
-    $scope.originalTodo = null;
-    $scope.reverted = true;
-  };
+  revertEdits (todo) {
+    this.todos[this.todos.indexOf(todo)] = this.$scope.originalTodo;
+    this.$scope.editedTodo = null;
+    this.$scope.originalTodo = null;
+    this.$scope.reverted = true;
+  }
 
-  $scope.removeTodo = function (todo) {
-    store.delete(todo);
-  };
+  removeTodo (todo) {
+    this.store.delete(todo);
+  }
 
-  $scope.saveTodo = function (todo) {
-    store.put(todo);
-  };
-
-  $scope.toggleCompleted = function (todo, completed) {
+  toggleCompleted (todo, completed) {
     if (angular.isDefined(completed)) {
       todo.completed = completed;
     }
-    store.put(todo, todos.indexOf(todo))
+    this.store.put(todo, this.todos.indexOf(todo))
       .then(function success() {}, function error() {
         todo.completed = !todo.completed;
       });
   };
 
-  $scope.clearCompletedTodos = function () {
-    store.clearCompleted();
+  clearCompletedTodos () {
+    this.store.clearCompleted();
   };
 
-  $scope.markAll = function (completed) {
-    todos.forEach(function (todo) {
+  markAll (completed) {
+    this.todos.forEach(function (todo) {
       if (todo.completed !== completed) {
-        $scope.toggleCompleted(todo, completed);
+        this.toggleCompleted(todo, completed);
       }
-    });
+    }, this);
   };
-};
+}
+
+module.exports = TodoController;
+module.exports.$inject = ['$scope', '$routeParams', '$filter', 'store'];

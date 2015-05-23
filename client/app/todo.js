@@ -14,10 +14,7 @@ module.exports = angular
     'templates',
     'ngRoute'
   ])
-  .controller('TodoController', [
-    '$scope', '$routeParams', '$filter', 'store',
-    TodoController
-  ])
+  .controller('TodoController', TodoController)
   .service('api', ApiService)
   .service('localStorage', LocalStorageService)
   .factory('todoStorage', TodoStorageService)
@@ -26,6 +23,7 @@ module.exports = angular
   .config(['$routeProvider', function ($routeProvider) {
     var routeConfig = {
       controller: 'TodoController',
+      controllerAs: 'ctrl',
       templateUrl: 'views/todo.html',
       resolve: {
         store: function (todoStorage) {
