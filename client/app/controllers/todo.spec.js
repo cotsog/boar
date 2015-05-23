@@ -31,7 +31,7 @@ describe('TodoController', function () {
   });
 
   it('should not have any Todos on start', function () {
-    expect(scope.todos.length).to.equal(0);
+    expect(scope.todos.length).to.eql(0);
   });
 
   it('should have all Todos completed', function () {
@@ -44,7 +44,7 @@ describe('TodoController', function () {
       scope.$emit('$routeChangeSuccess');
 
       expect(scope.status).to.equal('');
-      expect(scope.statusFilter).to.be.null;
+      expect(scope.statusFilter).to.eql({});
     });
 
     describe('being at /active', function () {
@@ -90,25 +90,25 @@ describe('TodoController', function () {
 
       it('should not add empty Todos', function () {
         scope.newTodo = '';
-        scope.addTodo();
+        ctrl.addTodo();
         scope.$digest();
-        expect(scope.todos.length).to.equal(0);
+        expect(scope.todos.length).to.eql(0);
       });
 
       it('should not add items consisting only of whitespaces', function () {
         scope.newTodo = '   ';
-        scope.addTodo();
+        ctrl.addTodo();
         scope.$digest();
-        expect(scope.todos.length).to.equal(0);
+        expect(scope.todos.length).to.eql(0);
       });
 
 
       it('should trim whitespace from new Todos', function () {
         scope.newTodo = '  buy some unicorns  ';
-        scope.addTodo();
+        ctrl.addTodo();
         scope.$digest();
-        expect(scope.todos.length).to.equal(1);
-        expect(scope.todos[0].title).to.equal('buy some unicorns');
+        expect(scope.todos.length).to.eql(1);
+        expect(scope.todos[0].title).to.eql('buy some unicorns');
       });
     });
 
@@ -130,50 +130,50 @@ describe('TodoController', function () {
       }));
 
       it('should count Todos correctly', function () {
-        expect(scope.todos.length).to.equal(5);
-        expect(scope.remainingCount).to.equal(3);
-        expect(scope.completedCount).to.equal(2);
+        expect(scope.todos.length).to.eql(5);
+        expect(scope.remainingCount).to.eql(3);
+        expect(scope.completedCount).to.eql(2);
         expect(scope.allChecked).to.be.falsy;
       });
 
       it('should save Todos to local storage', function () {
-        expect(scope.todos.length).to.equal(5);
+        expect(scope.todos.length).to.eql(5);
       });
 
       it('should remove Todos w/o title on saving', function () {
         var todo = store.todos[2];
-        scope.editTodo(todo);
+        ctrl.editTodo(todo);
         todo.title = '';
-        scope.saveEdits(todo);
-        expect(scope.todos.length).to.equal(4);
+        ctrl.saveEdits(todo);
+        expect(scope.todos.length).to.eql(4);
       });
 
       it('should trim Todos on saving', function () {
         var todo = store.todos[0];
-        scope.editTodo(todo);
+        ctrl.editTodo(todo);
         todo.title = ' buy moar unicorns  ';
-        scope.saveEdits(todo);
-        expect(scope.todos[0].title).to.equal('buy moar unicorns');
+        ctrl.saveEdits(todo);
+        expect(scope.todos[0].title).to.eql('buy moar unicorns');
       });
 
       it('clearCompletedTodos() should clear completed Todos', function () {
-        scope.clearCompletedTodos();
-        expect(scope.todos.length).to.equal(3);
+        ctrl.clearCompletedTodos();
+        expect(scope.todos.length).to.eql(3);
       });
 
       it('markAll() should mark all Todos completed', function () {
-        scope.markAll(true);
+        ctrl.markAll(true);
         scope.$digest();
-        expect(scope.completedCount).to.equal(5);
+        expect(scope.completedCount).to.eql(5);
       });
 
       it('revertTodo() get a Todo to its previous state', function () {
         var todo = store.todos[0];
-        scope.editTodo(todo);
+        ctrl.editTodo(todo);
         todo.title = 'Unicorn sparkly skypuffles.';
-        scope.revertEdits(todo);
+        ctrl.revertEdits(todo);
         scope.$digest();
-        expect(scope.todos[0].title).to.equal('Uncompleted Item 0');
+        expect(scope.todos[0].title).to.eql('Uncompleted Item 0');
       });
     });
 
