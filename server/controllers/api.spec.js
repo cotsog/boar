@@ -47,7 +47,7 @@ describe('ApiController', function() {
       .expect(200)
       .end(function(err, res){
         expect(res.body).to.eql(exampleTodo);
-        expect(Todo.findOneAndUpdate).to.have.been.calledWith({_id: 1}, {title: 'First task'});
+        expect(Todo.findOneAndUpdate).to.have.been.calledWith({_id: '1'}, {title: 'First task'});
 
         done(err);
       });
@@ -62,7 +62,7 @@ describe('ApiController', function() {
       .expect(200)
       .end(function(err, res){
         expect(res.body).to.eql(exampleTodo);
-        expect(Todo.findOneAndRemove).to.have.been.calledWith({_id: 1});
+        expect(Todo.findOneAndRemove).to.have.been.calledWith({_id: '1'});
 
         done(err);
       });
