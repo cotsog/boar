@@ -2,7 +2,6 @@
 
 var angular = require('angular');
 var TodoController = require('./controllers/todo');
-var MailService = require('./services/mail');
 var ApiService = require('./services/api');
 var LocalStorageService = require('./services/local_storage');
 var TodoStorageService = require('./services/todo_storage');
