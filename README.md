@@ -16,7 +16,7 @@ Make sure that you have io.js and MongoDB (running on the default port 27017) in
 
 ```bash
 git clone --depth 1 https://github.com/blacksonic/boar.git
-cd koan
+cd boar
 npm install
 npm start
 ```
