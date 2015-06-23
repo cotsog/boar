@@ -19,16 +19,16 @@ var tasks = require('boar-tasks').getTasks(gulp, {
   }
 });
 
-gulp.task('build', ['build-clean'], function(cb) {
+gulp.task('build', ['build-clean'], function(done) {
   runSequence([
     'server-copy', 'client-build'
-  ], cb);
+  ], done);
 });
 
-var startTasks = function() {
-  gulp.run('server');
-  gulp.run('server-watch');
-  gulp.run('client-watch');
+var startTasks = function(done) {
+  runSequence('server', 'server-watch', 'client-watch', function() {
+    done();
+  });
 };
 
 gulp.task('start', ['build'], startTasks);
@@ -77,7 +77,6 @@ gulp.task('client-jshint', function() { return tasks.client.jshint(); });
 
 gulp.task('client-watch', function() {
   gulp.watch(tasks.config.client.static.watchPattern, ['client-build-static']);
-  gulp.watch(tasks.config.client.app.watchPattern, ['client-build-scripts']);
   gulp.watch(tasks.config.client.stylesheets.watchPattern, ['client-build-stylesheets']);
   gulp.watch(tasks.config.client.app.viewPattern, ['client-build-views']);
 });

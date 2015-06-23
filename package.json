@@ -27,29 +27,28 @@
     "angular": "global:angular"
   },
   "dependencies": {
-    "angular": "1.3.15",
-    "angular-route": "1.3.15",
-    "bluebird": "2.9.25",
-    "boar-tasks": "1.6.0",
-    "bootstrap-styl": "4.0.4",
+    "angular": "1.4.1",
+    "angular-route": "1.4.1",
+    "bluebird": "2.9.30",
+    "boar-tasks": "2.0.0",
+    "bootstrap-styl": "4.0.5",
     "co-body": "2.0.0",
-    "koa": "0.20.0",
-    "koa-jade": "1.0.1",
-    "koa-router": "4.3.2",
+    "koa": "0.21.0",
+    "koa-jade": "1.1.0",
+    "koa-router": "5.1.2",
     "koa-static": "1.4.9",
-    "md5": "1.0.0",
-    "mongoose": "4.0.3"
+    "mongoose": "4.0.6"
   },
   "devDependencies": {
-    "angular-mocks": "1.3.15",
-    "babelify": "6.1.0",
-    "browserify-shim": "3.8.6",
-    "chai": "2.3.0",
-    "chai-as-promised": "5.0.0",
-    "gulp": "3.8.11",
-    "run-sequence": "1.1.0",
-    "sinon": "1.14.1",
-    "sinon-chai": "2.7.0",
+    "angular-mocks": "1.4.1",
+    "babelify": "6.1.2",
+    "browserify-shim": "3.8.9",
+    "chai": "3.0.0",
+    "chai-as-promised": "5.1.0",
+    "gulp": "3.9.0",
+    "run-sequence": "1.1.1",
+    "sinon": "1.15.3",
+    "sinon-chai": "2.8.0",
     "supertest": "1.0.1"
   }
 }
