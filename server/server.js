@@ -1,6 +1,6 @@
 'use strict';
 var app = require('./server_setup');
-var config = require('./config.js');
+var config = require('./config');
 var mongoose = require('mongoose');
 mongoose.connect(config.mongooseUri);
 

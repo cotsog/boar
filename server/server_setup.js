@@ -7,14 +7,14 @@ var serve = require('koa-static');
 var jade = require('koa-jade');
 
 var path = require('path');
-var config = require('./config.js');
+var config = require('./config');
 
 app.use(serve(
-  path.join(config.root, '/dist/assets')
+  path.join(config.root, '/assets')
 ));
 
 app.use(jade.middleware({
-  viewPath: path.join(config.root, '/dist/views')
+  viewPath: path.join(config.root, '/views')
 }));
 
 app.use(router.routes());

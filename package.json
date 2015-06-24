@@ -37,6 +37,7 @@
     "koa-jade": "1.1.0",
     "koa-router": "5.1.2",
     "koa-static": "1.4.9",
+    "lodash": "3.9.3",
     "mongoose": "4.0.6"
   },
   "devDependencies": {
