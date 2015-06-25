@@ -5,3 +5,5 @@ before_script:
   - "gulp update-webdriver"
 services:
   - mongodb
+after_success:
+  - echo $NODE_ENV
