@@ -5,5 +5,5 @@ before_script:
   - "gulp update-webdriver"
 services:
   - mongodb
-after_success:
+deploy:
   - node ./deploy.js
