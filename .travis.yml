@@ -6,4 +6,4 @@ before_script:
 services:
   - mongodb
 after_success:
-  - echo $NODE_ENV
+  - bash ./deploy.sh
