@@ -1,4 +1,5 @@
 echo "Starting to deploy"
+echo "NODE env is:"
 echo $NODE_ENV
 if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]]
   then

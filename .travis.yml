@@ -6,4 +6,4 @@ before_script:
 services:
   - mongodb
 after_success:
-  - node ./deploy.js
+  - bash ./deploy.sh
