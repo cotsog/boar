@@ -27,11 +27,7 @@
     "angular": "global:angular"
   },
   "dependencies": {
-    "angular": "1.4.1",
-    "angular-route": "1.4.1",
     "bluebird": "2.9.30",
-    "boar-tasks": "2.0.0",
-    "bootstrap-styl": "4.0.5",
     "co-body": "2.0.0",
     "koa": "0.21.0",
     "koa-jade": "1.1.0",
@@ -41,14 +37,18 @@
     "mongoose": "4.0.6"
   },
   "devDependencies": {
+    "bootstrap-styl": "4.0.5",
+    "angular": "1.4.1",
+    "angular-route": "1.4.1",
     "angular-mocks": "1.4.1",
     "babelify": "6.1.2",
+    "boar-tasks": "2.3.2",
     "browserify-shim": "3.8.9",
     "chai": "3.0.0",
     "chai-as-promised": "5.1.0",
     "gulp": "3.9.0",
     "run-sequence": "1.1.1",
-    "sinon": "1.15.3",
+    "sinon": "1.15.4",
     "sinon-chai": "2.8.0",
     "supertest": "1.0.1"
   }
