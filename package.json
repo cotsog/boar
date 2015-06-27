@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
-    "start": "gulp start"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -51,5 +51,8 @@
     "sinon": "1.15.4",
     "sinon-chai": "2.8.0",
     "supertest": "1.0.1"
+  },
+  "engines": {
+    "iojs": "2.3.1"
   }
 }
