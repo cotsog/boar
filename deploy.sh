@@ -19,7 +19,7 @@ if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; then
 
   heroku keys:clear
   yes | heroku keys:add
-  yes | git push heroku master
+  yes | git push -f heroku master
 else
   echo "Not possible to deploy"
 fi
