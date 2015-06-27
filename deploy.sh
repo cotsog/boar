@@ -1,11 +1,13 @@
 echo "Starting to deploy"
-echo "NODE env is:"
-echo $NODE_ENV
+
 if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]]
-  then
-    echo "On master, no pull request"
+  gulp build --production
+  cd ./dist
+  git init
+  git add -A .
+  git commit -m "Deploy from build #${TRAVIS_BUILD_NUMBER} commit ${TRAVIS_COMMIT}"
 else
-  then
-    echo "Not possible to deploy"
+  echo "Not possible to deploy"
 fi
+
 echo "done."
